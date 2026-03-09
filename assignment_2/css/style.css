@@ -1,0 +1,201 @@
+/* Basic Reset & Typography */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #c0c0c0;
+    /* Classic Windows 95 gray */
+    color: #000;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top Banner */
+.top-banner {
+    background-color: #B45A63;
+    height: 130px;
+    color: #FFFFFF;
+    padding: 20px;
+    text-align: center;
+    border: 4px solid #6B2A2A;
+}
+
+/* Layout Wrapper for Sidebar and Main Content */
+.layout-wrapper {
+    display: flex;
+    flex: 1;
+    /* Takes up the remaining vertical space */
+    overflow: hidden;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 230px;
+    background-color: #6B2A2A;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    margin-top: 20px;
+}
+
+.sidebar a,
+a:visited,
+a:link,
+a:active {
+    color: #fff;
+    text-decoration: none !important;
+    font-size: 20px;
+}
+
+.sidebar a:hover {
+    color: #33A0FF;
+}
+
+.sidebar li {
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    background-color: #16383f;
+    margin-bottom: 15px;
+}
+
+/* Main Content Area */
+.content-area {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+    overflow-y: auto;
+    font-size: 36px;
+    text-align: center;
+}
+
+.content-area h2 {
+    margin-bottom: 20px;
+}
+
+/* --- Under Construction Page --- */
+.hazard-bg {
+    background: repeating-linear-gradient(-45deg,
+            #ffea00,
+            #ffea00 30px,
+            #000 30px,
+            #000 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.construction-box {
+    background-color: #c0c0c0;
+    /* Match the sidebar gray */
+    border: 4px solid #000;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 10px 10px 0px #000;
+    /* Chunky retro drop shadow */
+}
+
+.construction-box h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* --- Showcase Layout Basics --- */
+.showcase-bg {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Aligns content near the top */
+    padding: 20px;
+}
+
+.showcase-title {
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+/* --- The Repeating 404 Glitch --- */
+.repeating-glitch {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.9;
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+
+    /* The Cyan and Hot Pink glitch effect */
+    text-shadow:
+        4px -2px 0px #00FFFF,
+        /* Cyan shadow shifted down/left */
+        -4px 2px 0px #FF1493;
+    /* Pink shadow shifted up/right */
+}
+
+/* --- The Glowing Bottom Text --- */
+.glowing-fault {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.1;
+
+    /* The blurry, glowing white drop shadow */
+    text-shadow:
+        -4px 4px 12px #ffffff;
+}
+
+/* --- Modern Marquee Styles --- */
+.marquee-container {
+    width: 100%;
+    font-size:24px;
+    margin-top: 300px;
+    background-color: #fff;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    overflow: hidden;
+    /* This hides the text when it goes outside the box */
+    position: relative;
+}
+
+.marquee-text,
+.marquee-text-fast {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FF0000;
+    /* Neon red text */
+    white-space: nowrap;
+    /* Forces the text to stay on one single line */
+    display: inline-block;
+}
+
+/* The standard left-scrolling animation */
+.marquee-text {
+    animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+        /* Starts off-screen to the right */
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* Ends off-screen to the left */
+    }
+}
