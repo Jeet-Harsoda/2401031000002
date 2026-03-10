@@ -5,7 +5,7 @@
     <title>Showcase-4</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body style="background-color: #e4dcdc;">
 
     <header class="top-banner">
         <br>
@@ -26,9 +26,69 @@
             </ul>
         </nav>
 
-        <main class="content-area">
-            <p>This website is an interactive directory designed to showcase various front-end web development techniques, custom CSS animations, and other cool things. Navigate using the sidebar menu to explore the available technical showcases.</p>
+         <main class="content-area showcase-bg">
+            <div style="background-color:#e4dcdc; padding:20px; width:100%; margin:0px; color: #000;">
+            <h2 class="showcase-title">Screen Saver Effect</h2>
+            </div>
+            <div class="screensaver-container">
+                <div class="bouncing-logo">★</div>
+            </div>
         </main>
+
+        <script>
+            //  Grab our HTML elements
+            const logo = document.querySelector('.bouncing-logo');
+            const container = document.querySelector('.screensaver-container');
+
+            //  Set starting position and speed (velocity)
+            let x = 50; 
+            let y = 50;
+            let speedX = 10; // Moves 10 pixels horizontally per frame
+            let speedY = 5; // Moves 5 pixels vertically per frame
+
+
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+
+            function animate() {
+                // Get the current dimensions of the container and the logo
+                const containerWidth = container.clientWidth;
+                const containerHeight = container.clientHeight;
+                const logoWidth = logo.offsetWidth;
+                const logoHeight = logo.offsetHeight-35;
+
+                // --- COLLISION MATH ---
+                // If the logo hits the right wall OR the left wall
+                if (x + logoWidth >= containerWidth || x <= 0) {
+                    speedX = -speedX; // Reverse horizontal direction
+                    changeColor();
+                }
+
+                // If the logo hits the bottom wall OR the top wall
+                if (y + logoHeight >= containerHeight || y <= -50) {
+                    speedY = -speedY; // Reverse vertical direction
+                    changeColor();
+                }
+
+                // Apply the speed to the position
+                x += speedX;
+                y += speedY;
+
+                // Physically move the HTML element
+                logo.style.left = x + 'px';
+                logo.style.top = y + 'px';
+
+
+                requestAnimationFrame(animate);
+            }
+
+            function changeColor() {
+
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                logo.style.color = randomColor;
+            }
+
+            requestAnimationFrame(animate);
+        </script>
     </div>
 
 </body>

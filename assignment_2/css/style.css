@@ -8,7 +8,6 @@
 body {
     font-family: 'Courier New', Courier, monospace;
     background-color: #c0c0c0;
-    /* Classic Windows 95 gray */
     color: #000;
     height: 100vh;
     display: flex;
@@ -29,7 +28,6 @@ body {
 .layout-wrapper {
     display: flex;
     flex: 1;
-    /* Takes up the remaining vertical space */
     overflow: hidden;
 }
 
@@ -94,12 +92,10 @@ a:active {
 
 .construction-box {
     background-color: #c0c0c0;
-    /* Match the sidebar gray */
     border: 4px solid #000;
     padding: 40px;
     text-align: center;
     box-shadow: 10px 10px 0px #000;
-    /* Chunky retro drop shadow */
 }
 
 .construction-box h1 {
@@ -115,7 +111,6 @@ a:active {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /* Aligns content near the top */
     padding: 20px;
 }
 
@@ -136,13 +131,9 @@ a:active {
     text-align: center;
     margin-bottom: 60px;
     letter-spacing: 2px;
-
-    /* The Cyan and Hot Pink glitch effect */
     text-shadow:
         4px -2px 0px #00FFFF,
-        /* Cyan shadow shifted down/left */
         -4px 2px 0px #FF1493;
-    /* Pink shadow shifted up/right */
 }
 
 /* --- The Glowing Bottom Text --- */
@@ -152,8 +143,6 @@ a:active {
     font-weight: 900;
     text-align: center;
     line-height: 1.1;
-
-    /* The blurry, glowing white drop shadow */
     text-shadow:
         -4px 4px 12px #ffffff;
 }
@@ -167,7 +156,6 @@ a:active {
     padding: 15px 0;
     margin-bottom: 30px;
     overflow: hidden;
-    /* This hides the text when it goes outside the box */
     position: relative;
 }
 
@@ -177,13 +165,10 @@ a:active {
     font-size: 1.5rem;
     font-weight: bold;
     color: #FF0000;
-    /* Neon red text */
     white-space: nowrap;
-    /* Forces the text to stay on one single line */
     display: inline-block;
 }
 
-/* The standard left-scrolling animation */
 .marquee-text {
     animation: scroll-left 15s linear infinite;
 }
@@ -191,11 +176,129 @@ a:active {
 @keyframes scroll-left {
     0% {
         transform: translateX(100%);
-        /* Starts off-screen to the right */
     }
 
     100% {
         transform: translateX(-100%);
-        /* Ends off-screen to the left */
     }
+}
+
+/* --- Cursor Trail Particle --- */
+.trail-particle {
+    position: absolute; 
+    width: 10px;
+    height: 10px;
+    background-color: #00FFFF; 
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 9999; 
+
+    animation: particle-fade 0.5s linear forwards; 
+}
+
+/* The fading and shrinking animation */
+@keyframes particle-fade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+}
+
+/* --- Bouncing Screensaver --- */
+.screensaver-container {
+    width: 100%;
+    height: 800px; 
+    background-color: #000;
+    border: 4px solid #333; 
+    border-radius: 10px;
+    position: relative; 
+    overflow: hidden;
+}
+
+.bouncing-logo {
+    position: absolute; 
+    font-family: 'Arial Black', sans-serif;
+    font-size: 8rem;
+    font-weight: bold;
+    color: #FF0000; 
+    padding: 0px;
+    margin:0px;
+    user-select: none; 
+}
+
+/* --- Tic-Tac-Toe Game --- */
+.game-status {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color:#000;
+}
+
+.tictactoe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 200px); 
+    grid-template-rows: repeat(3, 200px);    
+    gap: 5px; 
+    background-color: #e4dcdc;
+    border: 4px solid #c0c0c0; 
+    margin-bottom: 30px;
+}
+
+.cell {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10rem;
+    font-family: 'Arial Black', sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+.cell.x { color: #000000; } 
+.cell.o { color: #000000; } 
+
+.retro-btn {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #c0c0c0;
+    border: 2px solid #fff;
+    border-right-color: #000;
+    border-bottom-color: #000;
+    cursor: pointer;
+}
+
+.retro-btn:active {
+    border: 2px solid #000;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* --- Snake Game --- */
+.score-display {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+canvas#gameCanvas {
+    background-color: #000;
+    border: 6px solid #c0c0c0; 
+    box-shadow: 
+        0px 0px 0px 4px #000,
+        10px 10px 0px rgba(0,0,0,0.5); 
+    image-rendering: pixelated; 
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body style="background-color:#888;">
+<body>
 
     <header class="top-banner">
         <br>
@@ -33,13 +33,63 @@
         </nav>
 
         <main class="content-area showcase-bg">
-            <h2 class="showcase-title">Modern Marquee Implementation</h2>
-            <!-- <br> <br> <br> <br> <br> <br> -->
-            <div class="marquee-container">
-                <div class="marquee-text">
-                    *** UPDATE: NEW CSS MODULES ADDED *** SYSTEM OPERATING AT OPTIMAL CAPACITY *** END OF LINE ***
-                </div>
+            <div style="background-color:#e4dcdc; padding:20px; width:100%; margin:0px; color: #000;">
+            <h2 class="showcase-title">Cursor Trail Effect</h2>
             </div>
+        </main>
+
+        <script>
+            let lastX = 0;
+            let lastY = 0;
+            let hasStarted = false;
+            
+            // Grab the main content area
+            const mainArea = document.querySelector('.content-area');
+
+            function createParticle(x, y) {
+                const particle = document.createElement('div');
+                particle.className = 'trail-particle';
+                particle.style.left = (x - 5) + 'px';
+                particle.style.top = (y - 5) + 'px';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 500);
+            }
+
+            mainArea.addEventListener('mousemove', function(event) {
+                const currentX = event.pageX;
+                const currentY = event.pageY;
+
+                if (!hasStarted) {
+                    createParticle(currentX, currentY);
+                    lastX = currentX;
+                    lastY = currentY;
+                    hasStarted = true;
+                    return;
+                }
+
+                const deltaX = currentX - lastX;
+                const deltaY = currentY - lastY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const steps = Math.max(1, Math.floor(distance / 10));
+
+                for (let i = 1; i <= steps; i++) {
+                    const interpolatedX = lastX + (deltaX * (i / steps));
+                    const interpolatedY = lastY + (deltaY * (i / steps));
+                    createParticle(interpolatedX, interpolatedY);
+                }
+
+                lastX = currentX;
+                lastY = currentY;
+            });
+
+            mainArea.addEventListener('mouseleave', function() {
+                hasStarted = false; 
+            });
+        </script>
+    </div>
 
 </body>
 
