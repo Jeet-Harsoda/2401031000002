@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase-3</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="top-banner">
+        <br>
+        <a href="main.html">
+            <h1>Front-End Showcase</h1>
+        </a>
+    </header>
+
+    <div class="layout-wrapper">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="showcase-1.html">Showcase-1</a></li>
+                <li><a href="showcase-2.html">Showcase-2</a></li>
+                <li><a href="showcase-3.html">Showcase-3</a></li>
+                <li><a href="showcase-4.html">Showcase-4</a></li>
+                <li><a href="showcase-5.html">Showcase-5</a></li>
+                <li><a href="showcase-6.html">Showcase-6</a></li>
+                <li><a href="showcase-7.html">Showcase-7</a></li>
+                <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+                <br> <br> <br> <br> <br> <br>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+
+        <main class="content-area showcase-bg">
+            <div style="background-color:#e4dcdc; padding:20px; width:100%; margin:0px; color: #000;">
+            <h2 class="showcase-title">Cursor Trail Effect</h2>
+            </div>
+        </main>
+
+        <script>
+            let lastX = 0;
+            let lastY = 0;
+            let hasStarted = false;
+            
+            // Grab the main content area
+            const mainArea = document.querySelector('.content-area');
+
+            function createParticle(x, y) {
+                const particle = document.createElement('div');
+                particle.className = 'trail-particle';
+                particle.style.left = (x - 5) + 'px';
+                particle.style.top = (y - 5) + 'px';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 500);
+            }
+
+            mainArea.addEventListener('mousemove', function(event) {
+                const currentX = event.pageX;
+                const currentY = event.pageY;
+
+                if (!hasStarted) {
+                    createParticle(currentX, currentY);
+                    lastX = currentX;
+                    lastY = currentY;
+                    hasStarted = true;
+                    return;
+                }
+
+                const deltaX = currentX - lastX;
+                const deltaY = currentY - lastY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const steps = Math.max(1, Math.floor(distance / 10));
+
+                for (let i = 1; i <= steps; i++) {
+                    const interpolatedX = lastX + (deltaX * (i / steps));
+                    const interpolatedY = lastY + (deltaY * (i / steps));
+                    createParticle(interpolatedX, interpolatedY);
+                }
+
+                lastX = currentX;
+                lastY = currentY;
+            });
+
+            mainArea.addEventListener('mouseleave', function() {
+                hasStarted = false; 
+            });
+        </script>
+    </div>
+
+</body>
+
+</html>

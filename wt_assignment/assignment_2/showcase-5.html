@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase-5</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body >
+
+    <header class="top-banner">
+        <br>
+        <a href="main.html"><h1>Front-End Showcase</h1></a>
+    </header>
+
+    <div class="layout-wrapper">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="showcase-1.html">Showcase-1</a></li>
+                <li><a href="showcase-2.html">Showcase-2</a></li>
+                <li><a href="showcase-3.html">Showcase-3</a></li>
+                <li><a href="showcase-4.html">Showcase-4</a></li>
+                <li><a href="showcase-5.html">Showcase-5</a></li>
+                <li><a href="showcase-6.html">Showcase-6</a></li>
+                <li><a href="showcase-7.html">Showcase-7</a></li>
+				<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+
+        <main class="content-area showcase-bg" style="background-color: #e4dcdc;">
+            <h2 class="showcase-title" style="color: #000; font-weight:bold;">Tic-Tac-Toe</h2>
+            
+            <div class="game-status">Player X's Turn</div>
+
+            <div class="tictactoe-board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+
+            <button class="retro-btn" id="restart-btn">Restart Game</button>
+        </main>
+
+        <script>
+            const cells = document.querySelectorAll('.cell');
+            const statusDisplay = document.querySelector('.game-status');
+            const restartBtn = document.querySelector('#restart-btn');
+
+            let board = ["", "", "", "", "", "", "", "", ""];
+            let currentPlayer = "X";
+            let gameActive = true;
+
+            const winningConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6]             // Diagonals
+            ];
+
+            function handleCellClick(event) {
+                const clickedCell = event.target;
+                const cellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+                // Stop if the cell is already full or the game is over
+                if (board[cellIndex] !== "" || !gameActive) {
+                    return;
+                }
+
+                // Update the board array and the HTML
+                board[cellIndex] = currentPlayer;
+                clickedCell.innerText = currentPlayer;
+                clickedCell.classList.add(currentPlayer.toLowerCase());
+
+                checkWin();
+            }
+
+            function checkWin() {
+                let roundWon = false;
+
+                // Loop through all winning combinations to see if one matches the board
+                for (let i = 0; i < winningConditions.length; i++) {
+                    const [a, b, c] = winningConditions[i];
+                    if (board[a] !== "" && board[a] === board[b] && board[a] === board[c]) {
+                        roundWon = true;
+                        break;
+                    }
+                }
+                // Stop changing cell state if game is over
+                if (roundWon) {
+                    statusDisplay.innerText = `Player ${currentPlayer} Wins!`;
+                    gameActive = false;
+                    return;
+                }
+
+                // Check for a draw 
+                if (!board.includes("")) {
+                    statusDisplay.innerText = "It's a Draw!";
+                    gameActive = false;
+                    return;
+                }
+
+                // Switch player turn
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                statusDisplay.innerText = `Player ${currentPlayer}'s Turn`;
+            }
+
+            function restartGame() {
+                board = ["", "", "", "", "", "", "", "", ""];
+                currentPlayer = "O";
+                gameActive = true;
+                statusDisplay.innerText = `Player ${currentPlayer}'s Turn`;
+                
+                cells.forEach(cell => {
+                    cell.innerText = "";
+                    cell.classList.remove('x', 'o');
+                });
+            }
+
+            // Attach event listeners
+            cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+            restartBtn.addEventListener('click', restartGame);
+        </script>
+    </div>
+
+</body>
+</html>
